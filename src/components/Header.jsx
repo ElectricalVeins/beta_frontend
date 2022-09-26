@@ -1,42 +1,24 @@
-import { useContext, useState } from 'react';
-import { Button, Modal } from 'antd';
+import { useContext } from 'react';
+import { Space } from 'antd';
 import { UserContext } from '../ctx/user';
-import { LoginForm } from './forms/Login';
+import { LoginForm, SignupForm } from './forms/Forms';
+import { LogoutButton } from './LogoutButton';
+
+const buttonStrategy = {
+  false: [LoginForm, SignupForm],
+  true: [LogoutButton],
+};
 
 export const Header = () => {
   const user = useContext(UserContext);
-  const [open, setOpen] = useState(false);
-
-  const openModal = () => setOpen(true);
-  const onCreate = (values) => {
-    console.log('Received values of form: ', values);
-    setOpen(false);
-  };
-  const onCancel = () => setOpen(false);
-  const formSubmit = (form) => () => {
-    form
-      .validateFields()
-      .then((values) => {
-        form.resetFields();
-        onCreate(values);
-      })
-      .catch((info) => {
-        console.log('Validate Failed:', info);
-      });
-  };
+  console.log(user);
   return (
     <div>
-      <Button onClick={openModal}>{user ? 'Logout' : 'Login'}</Button>
-      <Modal
-        open={open}
-        title="Login"
-        okText="Login"
-        cancelText="Cancel"
-        onCancel={onCancel}
-        onOk={formSubmit}
-      >
-        <LoginForm onCreate={onCreate} />
-      </Modal>
+      <Space>
+        {buttonStrategy[Boolean(user).toString()].map((Component, i) => (
+          <Component key={i} />
+        ))}
+      </Space>
     </div>
   );
 };
