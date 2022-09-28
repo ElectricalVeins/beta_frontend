@@ -2,44 +2,44 @@ import queryString from 'query-string';
 import instance from './interceptors';
 
 export default class API {
-  http = instance;
+  static http = instance;
   /* AUTH */
-  signup(body) {
+  static signup(body) {
     return this.http.post('/auth/signup', body);
   }
 
-  signin(body) {
+  static signin(body) {
     return this.http.post('/auth/signin', body);
   }
 
-  refresh(params) {
+  static refresh(params) {
     const stringifiedParams = queryString.stringify({
       auth: params.auth,
     });
     return this.http.get(`/auth/refresh/${stringifiedParams}`);
   }
 
-  activate(params) {
+  static activate(params) {
     const stringifiedParams = queryString.stringify({
       token: params.token,
     });
     return this.http.get(`/auth/activate/${stringifiedParams}`);
   }
   /* USER */
-  getBulkUsers(params) {
+  static getBulkUsers(params) {
     const stringifiedParams = queryString.stringify(params);
     return this.http.get(`/users/${stringifiedParams}`);
   }
 
-  getUserById(id) {
+  static getUserById(id) {
     return this.http.get(`/users/${id}`);
   }
 
-  getCurrentUser() {
+  static getCurrentUser() {
     return this.http.get('/users/currentuser');
   }
 
-  updateUser(id, body) {
+  static updateUser(id, body) {
     return this.http.put(`/users/${id}`, body);
   }
 }

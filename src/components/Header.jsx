@@ -1,8 +1,9 @@
 import { useContext } from 'react';
-import { Space } from 'antd';
+import { Space, Typography } from 'antd';
 import { UserContext } from '../ctx/user';
 import { LoginForm, SignupForm } from './forms/Forms';
 import { LogoutButton } from './LogoutButton';
+import styles from '../styles';
 
 const buttonStrategy = {
   false: [LoginForm, SignupForm],
@@ -11,9 +12,9 @@ const buttonStrategy = {
 
 export const Header = () => {
   const user = useContext(UserContext);
-  console.log(user);
   return (
-    <div>
+    <div style={styles.spaceBetween}>
+      <Typography style={styles.logoText}>beta</Typography>
       <Space>
         {buttonStrategy[Boolean(user).toString()].map((Component, i) => (
           <Component key={i} />

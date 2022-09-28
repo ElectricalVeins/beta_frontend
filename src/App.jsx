@@ -1,21 +1,17 @@
-import { Layout, Typography, PageHeader, Divider } from 'antd';
+import { Layout, PageHeader } from 'antd';
 import { Header } from './components/Header';
 import { UserContext } from './ctx/user';
-
-const styles = {
-  header: { padding: '8px 12px' },
-  divider: { margin: '4px 0' },
-};
+import { Main } from './page/Main';
+import styles from './styles';
 
 function App() {
   return (
     <UserContext.Provider value={null}>
-      <Layout>
+      <Layout style={styles.pageLayout}>
         <PageHeader style={styles.header}>
           <Header />
         </PageHeader>
-        <Divider style={styles.divider} />
-        <Typography>Content</Typography>
+        <Main />
       </Layout>
     </UserContext.Provider>
   );

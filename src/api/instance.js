@@ -1,6 +1,6 @@
-import axios from "axios"
+import axios from 'axios';
 
 export default axios.create({
-    baseURL:'localhost:4000',
-    timeout: 30000,
+  baseURL: 'http://localhost:4000',
+  timeout: 30000,
 });
