@@ -4,8 +4,7 @@ import { UserContext } from '../ctx/user';
 import styles from '../styles';
 
 export const Main = (props) => {
-  const user = useContext(UserContext);
-
+  const [user] = useContext(UserContext);
   return (
     <div>
       <Divider style={styles.divider} />

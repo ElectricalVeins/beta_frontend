@@ -11,7 +11,7 @@ const buttonStrategy = {
 };
 
 export const Header = () => {
-  const user = useContext(UserContext);
+  const [user] = useContext(UserContext);
   return (
     <div style={styles.spaceBetween}>
       <Typography style={styles.logoText}>beta</Typography>

@@ -8,7 +8,6 @@ import API from '../../api/requests';
 
 const ButtonFormBody = (props) => {
   const { text, formComponent, onSuccess } = props;
-  const user = useContext(UserContext);
 
   const modalControls = useState(false);
   const [, setOpen] = modalControls;
@@ -16,7 +15,7 @@ const ButtonFormBody = (props) => {
 
   return (
     <>
-      <Button onClick={openModal}>{user ? 'Logout' : text}</Button>
+      <Button onClick={openModal}>{text}</Button>
       <ModalForm
         controls={modalControls}
         formComponent={formComponent}
@@ -27,21 +26,31 @@ const ButtonFormBody = (props) => {
 };
 
 export const LoginForm = (props) => {
+  const [, setUser] = useContext(UserContext);
+  const handler = async (values) => {
+    const res = await API.signup(values);
+    setUser(res.body?.data?.user);
+    localStorage.setItem('auth-access', res.body?.data?.tokens?.access);
+    localStorage.setItem('auth-refresh', res.body?.data?.tokens?.refresh);
+  };
   return (
-    <ButtonFormBody
-      formComponent={Login}
-      text={'Login'}
-      onSuccess={API.signin.bind(API)}
-    />
+    <ButtonFormBody formComponent={Login} text={'Login'} onSuccess={handler} />
   );
 };
 
 export const SignupForm = (props) => {
+  const [, setUser] = useContext(UserContext);
+  const handler = async (values) => {
+    const res = await API.signup(values);
+    setUser(res.body?.data?.user);
+    localStorage.setItem('auth-access', res.body?.data?.tokens?.access);
+    localStorage.setItem('auth-refresh', res.body?.data?.tokens?.refresh);
+  };
   return (
     <ButtonFormBody
       formComponent={Signup}
       text={'Signup'}
-      onSuccess={API.signup.bind(API)}
+      onSuccess={handler}
     />
   );
 };
