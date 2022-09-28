@@ -1,21 +1,20 @@
 import { notification } from 'antd';
 
-const getDefaultNotificationConfig = () => ({
+const getNotificationConfig = (config) => ({
   top: 60,
   duration: 5,
+  ...config,
   // icon: ReactNode,
 });
 
 export const notificateError = (err, config = {}) =>
   notification.error({
-    ...getDefaultNotificationConfig(),
-    ...config,
+    ...getNotificationConfig(config),
     description: err.message,
   });
 
 export const notificateInfo = (info, config = {}) =>
-  notification.error({
-    ...getDefaultNotificationConfig(),
-    ...config,
+  notification.info({
+    ...getNotificationConfig(config),
     description: info,
   });
