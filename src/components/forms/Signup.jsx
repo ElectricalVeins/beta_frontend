@@ -17,6 +17,7 @@ export const Signup = ({ form }) => {
 
       <Form.Item name="tier" rules={[{ required: true }]}>
         <Radio.Group>
+          {/* Dynamic render based on api request - Show existing app tiers */}
           <Radio value="public">Public</Radio>
           <Radio value="private">Private</Radio>
         </Radio.Group>
