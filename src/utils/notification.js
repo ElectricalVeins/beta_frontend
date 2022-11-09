@@ -10,7 +10,7 @@ const getNotificationConfig = (config) => ({
 export const notificateError = (err, config = {}) =>
   notification.error({
     ...getNotificationConfig(config),
-    description: err.message,
+      description: Array.isArray(err.message) ? err.message?.join('|') : err.message,
   });
 
 export const notificateInfo = (info, config = {}) =>

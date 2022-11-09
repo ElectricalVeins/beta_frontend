@@ -35,8 +35,8 @@ export default class API {
     return this.http.get(`/users/${id}`);
   }
 
-  static getCurrentUser() {
-    return this.http.get('/users/currentuser');
+  static getCurrentUser(token) {
+    return this.http.get('/users/currentuser', {headers: {Authorization: `Bearer ${token}`}});
   }
 
   static updateUser(id, body) {

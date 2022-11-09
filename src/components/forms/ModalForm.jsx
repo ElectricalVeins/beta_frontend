@@ -1,6 +1,5 @@
 import { Form, Modal } from 'antd';
-import { useContext, useState } from 'react';
-import { UserContext } from '../../ctx/user';
+import { useState } from 'react';
 import { notificateError } from '../../utils/notification';
 
 export const ModalForm = ({
