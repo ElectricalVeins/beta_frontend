@@ -1,5 +1,4 @@
 import { Form, Input, Radio, Select } from 'antd';
-import { timezones } from "../../utils/timezones";
 
 export const Signup = ({ form }) => {
   return (
@@ -12,7 +11,7 @@ export const Signup = ({ form }) => {
                 filterOption={(input, option) =>
                     (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
                 }
-                options={timezones.map((value) => ({value, label: value}))}
+                options={Intl.supportedValuesOf('timeZone').map((value) => ({value, label: value}))}
             />
         </Form.Item>
 

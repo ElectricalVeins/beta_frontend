@@ -3,7 +3,6 @@ import {UserContext} from "../../ctx/user";
 import API from "../../api/requests";
 import {AbstractButtonModalForm} from "./AbstractButtonModalForm";
 import {Form, Input, Radio, Select} from "antd";
-import {timezones} from "../../utils/timezones";
 
 export const AccountEdit = (props) => {
     const [user, setUser] = useContext(UserContext);
@@ -33,7 +32,7 @@ const EditForm = ({form}) => {
                     filterOption={(input, option) =>
                         (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
                     }
-                    options={timezones.map((value) => ({value, label: value}))}
+                    options={Intl.supportedValuesOf('timeZone').map((value) => ({value, label: value}))}
                 />
             </Form.Item>
 
